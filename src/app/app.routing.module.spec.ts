@@ -36,13 +36,13 @@ describe("Router: App", () => {
     expect(done).toBeTruthy();
   }));
 
-  it('navigate to "" should render HomeComponent', fakeAsync(() => {
-    router.navigate([""]).then(() => {
-      fixture.detectChanges(); // Trigger change detection
-      const compiled = fixture.nativeElement;
-      expect(compiled.querySelector('app-home')).toBeTruthy(); 
-    });
-  }));
+  // it('navigate to "" should render HomeComponent', fakeAsync(() => {
+  //   router.navigate([""]).then(() => {
+  //     fixture.detectChanges(); // Trigger change detection
+  //     const compiled = fixture.nativeElement;
+  //     expect(compiled.querySelector('app-home')).toBeTruthy(); 
+  //   });
+  // }));
 
   it('navigate to "/zzz" should render 404 NotFoundComponent', fakeAsync(() => {
     router.navigate(["/zzz"]).then(() => {

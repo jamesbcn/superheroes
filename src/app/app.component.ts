@@ -9,8 +9,13 @@ import { LoadingComponent } from './components/loading/loading.component';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, NavbarComponent, SidebarComponent, LoadingComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  template: `
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+    <router-outlet></router-outlet>
+
+    <app-loading></app-loading>
+  `,
 })
 export class AppComponent {
   title = 'superheroes';
