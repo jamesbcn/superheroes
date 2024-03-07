@@ -1,28 +1,35 @@
-import { Component } from '@angular/core';
-import { SuperheroesService } from '../../services/superheroes.service'
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { SuperheroesService } from '../../services/superheroes.service';
 import { Hero } from '../../models/hero';
-import { JsonPipe } from '@angular/common';
-
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { SafeDataSourceModule } from '../../custom-pipes/safe-data-source/safe-data-source.module';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [JsonPipe, AsyncPipe, SafeDataSourceModule, MatPaginatorModule, MatTableModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
 
-  heroes: Hero[] = [];
+  heroes$!: Observable<Hero[]>; // Use $ to indicate an observable
+  displayedColumns: string[] = ['name', 'intelligence', 'strength', 'speed', 'durability', 'power', 'combat'];
+  dataSource = new MatTableDataSource<Hero>([]);
+
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   constructor(private superheroesService: SuperheroesService) { }
 
-  ngOnInit() {
-    this.superheroesService.getHeroes().subscribe(heroes => {
-      this.heroes = heroes;
-
-      console.log("heros", this.heroes)
-    });
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 
-
+  ngOnInit() {
+    this.heroes$ = this.superheroesService.getHeroes(); // Subscribe in ngOnInit
+  }
 }

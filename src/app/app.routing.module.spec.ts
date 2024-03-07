@@ -6,8 +6,9 @@ import { HomeComponent } from './components/home/home.component';
 import { AppComponent } from "./app.component";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { routes } from './app.routes';
-import { NavbarComponent } from "./components/navbar/navbar.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 describe("Router: App", () => {
   let location: Location;
@@ -16,7 +17,7 @@ describe("Router: App", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes), HomeComponent, NotFoundComponent, NavbarComponent, SidebarComponent],
+      imports: [RouterTestingModule.withRoutes(routes), HomeComponent, NotFoundComponent, SidebarComponent, BrowserAnimationsModule],
     });
 
     router = TestBed.inject(Router);
