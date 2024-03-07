@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+
+  sideNavCollapsed = signal(false);
+  @Input() set collapsed(val: boolean){
+    this.sideNavCollapsed.set(val)
+  }
 
 }
