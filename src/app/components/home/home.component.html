@@ -1,58 +1,36 @@
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="heroes$ | async | safeDataSource">
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> 
-          Name 
-        </th>
-        <td mat-cell *matCellDef="let element"> <img [src]="element.images.xs" alt="Imágen de héroe"> {{element.name}} </td>
-      </ng-container>
-  
-      <!-- intelligence Column -->
-      <ng-container matColumnDef="intelligence">
-        <th mat-header-cell *matHeaderCellDef> intelligence </th>
-        <td mat-cell *matCellDef="let element"> {{element.powerstats.intelligence}} </td>
-      </ng-container>
-  
-      <!-- strength Column -->
-      <ng-container matColumnDef="strength">
-        <th mat-header-cell *matHeaderCellDef> strength </th>
-        <td mat-cell *matCellDef="let element"> {{element.powerstats.strength}} </td>
-      </ng-container>
+  <table mat-table [dataSource]="dataSource">
 
-      <!-- speed Column -->
-      <ng-container matColumnDef="speed">
-        <th mat-header-cell *matHeaderCellDef> speed </th>
-        <td mat-cell *matCellDef="let element"> {{element.powerstats.speed}} </td>
-      </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
 
-      <!-- durability Column -->
-      <ng-container matColumnDef="durability">
-        <th mat-header-cell *matHeaderCellDef> durability </th>
-        <td mat-cell *matCellDef="let element"> {{element.powerstats.durability}} </td>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-      <!-- power Column -->
-      <ng-container matColumnDef="power">
-        <th mat-header-cell *matHeaderCellDef> power </th>
-        <td mat-cell *matCellDef="let element"> {{element.powerstats.power}} </td>
-      </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
 
-      <!-- combat Column -->
-      <ng-container matColumnDef="combat">
-        <th mat-header-cell *matHeaderCellDef> combat </th>
-        <td mat-cell *matCellDef="let element"> {{element.powerstats.combat}} </td>
-      </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator 
-                    #paginator
-                    [pageSizeOptions]="[10, 20, 50]"
-                   showFirstLastButtons
-                   aria-label="Elige página de héroes">
-    </mat-paginator>
-  </div>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

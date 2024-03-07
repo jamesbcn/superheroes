@@ -12,7 +12,7 @@ export class SuperheroesService {
 
   constructor(private http: HttpClient) { }
 
-  getHeroes(filter?: string): Observable<Hero[]> {
+  getHeroes(filter?: string): Observable<any[]> {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 
