@@ -2,7 +2,7 @@ import { TestBed, fakeAsync, tick, ComponentFixture } from "@angular/core/testin
 import { Location } from "@angular/common";
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { HeroListComponent } from './components/hero-list/hero-list.component';
 import { AppComponent } from "./app.component";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { routes } from './app.routes';
@@ -17,7 +17,7 @@ describe("Router: App", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes), HomeComponent, NotFoundComponent, SidebarComponent, BrowserAnimationsModule],
+      imports: [RouterTestingModule.withRoutes(routes), HeroListComponent, NotFoundComponent, SidebarComponent, BrowserAnimationsModule],
     });
 
     router = TestBed.inject(Router);
@@ -36,14 +36,6 @@ describe("Router: App", () => {
     tick(50);
     expect(done).toBeTruthy();
   }));
-
-  // it('navigate to "" should render HomeComponent', fakeAsync(() => {
-  //   router.navigate([""]).then(() => {
-  //     fixture.detectChanges(); // Trigger change detection
-  //     const compiled = fixture.nativeElement;
-  //     expect(compiled.querySelector('app-home')).toBeTruthy(); 
-  //   });
-  // }));
 
   it('navigate to "/zzz" should render 404 NotFoundComponent', fakeAsync(() => {
     router.navigate(["/zzz"]).then(() => {

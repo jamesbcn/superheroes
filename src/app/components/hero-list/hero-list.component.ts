@@ -3,25 +3,30 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { SuperheroesService } from '../../services/superheroes.service'
 import { Hero } from '../../models/hero';
+import { LoadingService } from '../../services/loading.service';
 
 /**
  * @title Table with pagination
  */
 @Component({
-  selector: 'app-home',
+  selector: 'app-hero-list',
   standalone: true,
   imports: [MatPaginatorModule, MatTableModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './hero-list.component.html',
+  styleUrl: './hero-list.component.scss'
 })
-export class HomeComponent implements AfterViewInit {
+export class HeroListComponent implements AfterViewInit {
   heroes: Hero[] = [];
   displayedColumns: string[] = ['name', 'intelligence', 'strength', 'speed', 'durability', 'power', 'combat'];
   dataSource = new MatTableDataSource<Hero>(this.heroes);
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
-  constructor(private superheroesService: SuperheroesService) { }
+  constructor(private superheroesService: SuperheroesService, private loading: LoadingService) { }
+
+  ngOnInit(){
+    this.loading.loadingOn();
+  }
 
   ngAfterViewInit() {
     
@@ -32,6 +37,7 @@ export class HomeComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource<Hero>(this.heroes);
         this.dataSource.paginator = this.paginator;  
       }
+      this.loading.loadingOff();
 
     });
 
