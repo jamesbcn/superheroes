@@ -1,0 +1,26 @@
+<mat-toolbar class="mat-elevation-z3">
+    <div class="toolbar-container">
+        <div class="box">
+            <button mat-icon-button (click)="collapsed.set(!collapsed())">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="box">SUPERHÉROES</div>
+        <div class="box">
+            <app-search></app-search>
+        </div>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container>
+  
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+      <app-sidebar [collapsed]="collapsed()"></app-sidebar>
+  </mat-sidenav>
+      
+  <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <app-loading></app-loading>
