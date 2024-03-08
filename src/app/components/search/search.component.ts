@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/internal/Observable';
 import {map, startWith} from 'rxjs/operators';
 import {AsyncPipe} from '@angular/common';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { SuperheroesService } from '../../services/superheroes.service';
 import { Hero } from '../../models/hero';
 
 @Component({
@@ -29,14 +28,10 @@ export class SearchComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
   heroes: Hero[] = [];
 
-  constructor(private superheroesService: SuperheroesService){}
+  constructor(){}
 
   ngOnInit() {
 
-    this.superheroesService.heroes$.subscribe({
-      next: (value) => { this.heroes = value; console.log("arrived!")},
-      error: (error) => { console.error(error); }
-    });
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),

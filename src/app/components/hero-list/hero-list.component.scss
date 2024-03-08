@@ -7,8 +7,10 @@ th, td {
 }
 
 .first-col {
-    text-align: left !important;
     display: flex;
+    flex-direction: row;
+    text-align: left !important;
     align-items: center;
     gap: 25px;
+    
 }
