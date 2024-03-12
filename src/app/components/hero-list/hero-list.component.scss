@@ -11,6 +11,13 @@ th, td {
     flex-direction: row;
     text-align: left !important;
     align-items: center;
-    gap: 25px;
-    
+    gap: 25px;  
+}
+
+.last-col {
+  display: flex;
+  flex-direction: row;
+  text-align: right;
+  align-items: center;
+  gap: 20px;  
 }

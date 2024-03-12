@@ -21,7 +21,7 @@
       <ng-container matColumnDef="intelligence">
         <th mat-header-cell *matHeaderCellDef> Inteligencia </th>
         <td mat-cell *matCellDef="let element"> 
-          <div>{{element.powerstats.intelligence}}</div> 
+          {{element.powerstats.intelligence}}
         </td>
       </ng-container>
   
@@ -59,7 +59,14 @@
       <!-- delete Column -->
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element"> <mat-icon class="pointer" (click)="onDeleteHero(element.id)">delete</mat-icon> </td>
+        <td mat-cell *matCellDef="let element"> 
+          <div class="last-col">
+            
+            <div><mat-icon class="pointer" (click)="onEditHero(element.id)">edit</mat-icon></div>
+            <div><mat-icon class="pointer" (click)="onDeleteHero(element.id)">delete</mat-icon></div>
+          </div>
+        </td>
+        
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

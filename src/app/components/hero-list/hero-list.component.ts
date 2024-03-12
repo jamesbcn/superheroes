@@ -46,6 +46,18 @@ export class HeroListComponent implements AfterViewInit {
         }, 500)
 
   }
+
+  async onEditHero(id:string) {
+    await this.store.deleteHero(id);
+    this.store.heroes();
+
+    const updatedHeroes = this.store.heroes().filter(hero => hero.id !== id);
+
+    this.tableRefresh(updatedHeroes)
+
+  }
+
+  
   
   async onDeleteHero(id:string){
     await this.store.deleteHero(id);
