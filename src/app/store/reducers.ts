@@ -6,6 +6,7 @@ import { Hero } from '../models/hero';
 
 export const initialState: HeroesState = {
     isLoading: false,
+    menuHidden: true,
     heroes: [],
     error: null,
 }
@@ -73,7 +74,12 @@ export const reducers = createReducer(
       ...state,
       isLoading: false,
       error: action.error,
-    }))
+    })),
 
+    on(HeroesActions.changeMenuToggle, (state, action) => ({
+      ...state,
+      menuHidden: !state.menuHidden,
+    })),
+    
 
   );

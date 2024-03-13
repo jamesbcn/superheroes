@@ -16,3 +16,7 @@ export const updateHeroFailure = createAction('[Heroes] Update Hero Failure', pr
 export const deleteHero = createAction('[Heroes] Delete Hero', props<{id: string}>());
 export const deleteHeroSuccess = createAction('[Heroes] Delete Hero Success', props<{id: string | undefined}>() );
 export const deleteHeroFailure = createAction('[Heroes] Delete Hero Failure', props<{error: string}>());
+
+export const changeMenuToggle = createAction('[Heroes] Change Menu Toggle');
+export const changeMenuToggleSuccess = createAction('[Heroes] Change Menu Toggle Success', props<{menuHidden: boolean | undefined}>() );
+export const changeMenuToggleFailure = createAction('[Heroes] Change Menu Toggle Failure', props<{error: string}>());

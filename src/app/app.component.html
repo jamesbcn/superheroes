@@ -1,7 +1,8 @@
 <mat-toolbar class="mat-elevation-z3">
     <div class="toolbar-container">
+        <h1>{{collapsed }}</h1>
         <div class="box">
-            <button mat-icon-button (click)="collapsed.set(!collapsed())">
+            <button mat-icon-button (click)="toggleMenu()">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -15,11 +16,11 @@
   </mat-toolbar>
   <mat-sidenav-container>
   
-  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
-      <app-sidebar [collapsed]="collapsed()"></app-sidebar>
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth">
+      <app-sidebar [collapsed]="collapsed"></app-sidebar>
   </mat-sidenav>
       
-  <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+  <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth">
       <router-outlet></router-outlet>
   </mat-sidenav-content>
 

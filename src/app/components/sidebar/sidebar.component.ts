@@ -53,6 +53,7 @@ export class SidebarComponent {
    onAddHero(hero:Partial<Hero>) {
 
       this.store.dispatch(HeroesActions.addHero({hero: hero}));
+      this.store.dispatch(HeroesActions.changeMenuToggle());
 
    }
 

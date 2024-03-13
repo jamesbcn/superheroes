@@ -7,9 +7,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav'
-import { Store } from '@ngrx/store';
-import * as HeroesActions from './store/actions'
+import { Store, select } from '@ngrx/store';
+import * as HeroesActions from './store/actions';
 import { AppStateInterface } from './models/appState';
+import { menuHiddenSelector } from './store/selectors';
 
 
 @Component({
@@ -22,15 +23,24 @@ import { AppStateInterface } from './models/appState';
 })
 export class AppComponent {
 
+  collapsed = false;
+  sidenavWidth = '0px';
+
   constructor(private store: Store<AppStateInterface>){ }
-  
-  collapsed = signal(true);
-  sidenavWidth = computed(() => this.collapsed() ? '0px' : '650px')
 
   ngOnInit(){
 
     this.store.dispatch(HeroesActions.getHeroes());
+
+    this.store.pipe( select(menuHiddenSelector) ).subscribe(value =>{
+      this.collapsed = value;
+      this.sidenavWidth =  this.collapsed ? '0px' : '650px';
+    })
     
+  }
+
+  toggleMenu(){
+    this.store.dispatch(HeroesActions.changeMenuToggle());
   }
 
 
