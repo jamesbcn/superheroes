@@ -55,6 +55,7 @@ export class HeroListComponent {
 
 
   doFilter(event: any) {
+
     const val = event.target.value.trim().toLocaleLowerCase();
     this.dataSource.filter = val;
 

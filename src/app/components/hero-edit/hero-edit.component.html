@@ -6,7 +6,7 @@
       <img mat-card-image [src]="data.images.lg" height="100%" alt="Imágen">
     </div>
 
-    <div>
+    <div class="card-container">
       <mat-card>
         <mat-card-content>
           <form #heroForm="ngForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
@@ -66,10 +66,9 @@
               </mat-error>
             </mat-form-field>
             
-            
-            <div>
+            <div class="buttons-container">
               <button mat-raised-button type="submit" [disabled]="!heroForm.valid">Enviar</button>
-            <button mat-raised-button (click)="close()">Cerrar</button>
+              <button mat-raised-button (click)="close()">Cerrar</button>
             </div>
           </form>
         </mat-card-content>
