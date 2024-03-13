@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, exhaustMap, of } from 'rxjs';
 import { HeroesService } from '../services/heroes.service';
 import * as HeroesActions from './actions';
 import { Hero } from '../models/hero';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class HeroesEffects {
+
+  private toastr = inject(ToastrService);
 
   getHeroes$ = createEffect(() =>
     this.actions$.pipe(
@@ -14,10 +17,17 @@ export class HeroesEffects {
       exhaustMap(() => {
         return this.heroesService.getHeroes().pipe(
 
-          map((heroes: Hero[] | undefined) => HeroesActions.getHeroesSuccess({ heroes })),
+          map((heroes: Hero[] | undefined) => {
 
-          catchError((error) =>
-            of(HeroesActions.getHeroesFailure({ error: error.message }))
+            this.toastr.success('¡Heroes listos!');
+            return HeroesActions.getHeroesSuccess({ heroes })
+          }),
+
+          catchError((error) => {
+            console.error(error)
+            this.toastr.error(`ERROR: ${error.message}`);
+            return of(HeroesActions.getHeroesFailure({ error: error.message }))
+          }
           )
 
         );
@@ -31,10 +41,17 @@ export class HeroesEffects {
       exhaustMap((action) => {
         const hero: Partial<Hero> = action.hero;
         return this.heroesService.addHero(hero).pipe(
-          map((updatedHero: Hero | undefined) => HeroesActions.addHeroSuccess({ hero: updatedHero })),
-          catchError((error) =>
-            of(HeroesActions.getHeroesFailure({ error: error.message }))
-          )
+          map((updatedHero: Hero | undefined) => {
+
+          this.toastr.success('Hero added successfully!');
+
+          return HeroesActions.addHeroSuccess({ hero: updatedHero })  
+          }),
+          catchError((error) => {
+            console.error(error)
+            this.toastr.error(`ERROR: ${error.message}`);
+            return of(HeroesActions.getHeroesFailure({ error: error.message }))
+          })
         );
       })
     )
@@ -46,10 +63,15 @@ export class HeroesEffects {
       exhaustMap((action) => {
         const hero: Hero = action.hero;
         return this.heroesService.updateHero(hero).pipe(
-          map((updatedHero: Hero | undefined) => HeroesActions.updateHeroSuccess({ hero: updatedHero })),
-          catchError((error) =>
-            of(HeroesActions.getHeroesFailure({ error: error.message }))
-          )
+          map((updatedHero: Hero | undefined) => {
+            this.toastr.success('¡Heroe actualizado con éxito!');
+            return HeroesActions.updateHeroSuccess({ hero: updatedHero });
+          }),
+          catchError((error) => {
+            console.error(error)
+            this.toastr.error(`ERROR: ${error.message}`);
+            return of(HeroesActions.getHeroesFailure({ error: error.message }))
+          })
         );
       })
     )
@@ -60,10 +82,15 @@ export class HeroesEffects {
       ofType(HeroesActions.deleteHero),
       exhaustMap((action) => {
         return this.heroesService.deleteHero(action.id).pipe(
-          map((id: string) => HeroesActions.deleteHeroSuccess({ id: action.id  })),
-          catchError((error) =>
-            of(HeroesActions.deleteHeroFailure({ error: error.message }))
-          )
+          map((id: string) => {
+            this.toastr.success('¡Heroe borrado con éxito!');
+            return HeroesActions.deleteHeroSuccess({ id: action.id  })
+          }),
+          catchError((error) => {
+            console.error(error)
+            this.toastr.error(`ERROR: ${error.message}`);
+            return of(HeroesActions.getHeroesFailure({ error: error.message }))
+          })
         );
       })
     )

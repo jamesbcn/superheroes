@@ -1,7 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { Component } from '@angular/core';
-import { LoadingService } from '../../services/loading.service';
+import { Component, inject } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { isLoadingSelector } from '../../store/selectors';
 
 @Component({
   selector: 'app-loading',
@@ -12,8 +13,11 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class LoadingComponent {
 
-  constructor(public loadingService: LoadingService) {
+  store = inject(Store);
 
+  loading$ = this.store.pipe( select(isLoadingSelector) );
+
+  constructor() {
   }
 
 }

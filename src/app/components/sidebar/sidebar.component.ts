@@ -86,9 +86,9 @@ export class SidebarComponent {
 
       this.onAddHero(hero);
 
-      this.heroForm.reset();
-
       this.sideNavCollapsed.set(true);
+
+      
       
     } else {
       // Toaster message!

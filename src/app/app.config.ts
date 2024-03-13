@@ -10,6 +10,9 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import { HeroesEffects } from './store/effects';
 
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
@@ -18,5 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({'heroes': reducers}),
     provideEffects(HeroesEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: false, autoPause: true }),
+    provideAnimations(),
+    provideToastr(),
   ]
 };
