@@ -88,7 +88,6 @@ export class SidebarComponent {
 
       this.heroForm.reset();
 
-      console.log("collapse!!!")
       this.sideNavCollapsed.set(true);
       
     } else {

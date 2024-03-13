@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, ViewChild } from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { Hero } from '../../models/hero';
 import { MatIcon } from '@angular/material/icon';
 import { Store, select } from '@ngrx/store';
@@ -14,7 +17,8 @@ import * as HeroesActions from '../../store/actions';
 @Component({
   selector: 'app-hero-list',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, MatIcon],
+  imports: [MatPaginatorModule, MatTableModule, MatSortModule, MatFormFieldModule,
+    MatInputModule, MatIcon],
   templateUrl: './hero-list.component.html',
   styleUrl: './hero-list.component.scss'
 })
@@ -24,6 +28,7 @@ export class HeroListComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Hero>([]);
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatSort) sort?: MatSort;
 
   constructor(private store: Store<AppStateInterface>) { }
 
@@ -31,10 +36,11 @@ export class HeroListComponent implements AfterViewInit {
     
     this.store.pipe( select(heroesSelector) ).subscribe(heroes => {
 
-      if(this.paginator) {
+      if(this.paginator && this.sort) {
       
             this.dataSource = new MatTableDataSource<Hero>(heroes);
             this.dataSource.paginator = this.paginator; 
+            this.dataSource.sort = this.sort;
             
           }
 
@@ -58,8 +64,14 @@ export class HeroListComponent implements AfterViewInit {
 
 
   };
+
+  doFilter(event: any) {
+
+    let val = event.target.value;
+    this.dataSource.filter = val.trim().toLocaleLowerCase();
+  }
   
-async onEditHero(id:string) {
+onEditHero(id:string) {
     // await this.store.deleteHero(id);
     // this.store.heroes();
 

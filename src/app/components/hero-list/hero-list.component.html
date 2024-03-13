@@ -1,10 +1,17 @@
 <div class="page-container">
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+
+    <div >
+      <mat-form-field>
+        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Filtro">
+      </mat-form-field>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort>
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
         <td mat-cell *matCellDef="let element"> 
           <div class="first-col">
             @if(element.images.xs){
