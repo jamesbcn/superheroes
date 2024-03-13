@@ -8,7 +8,7 @@ import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { Hero } from '../../models/hero';
 import { Store } from '@ngrx/store';
-import * as HeroesActions from '../../store/actions'
+import * as HeroesActions from '../../store/actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -53,9 +53,9 @@ export class SidebarComponent {
 
    }
 
-   async onAddHero(hero:Partial<Hero>) {
+   onAddHero(hero:Partial<Hero>) {
 
-      //await this.store.addHero(hero)
+      this.store.dispatch(HeroesActions.addHero({hero: hero}));
 
    }
 
@@ -85,6 +85,11 @@ export class SidebarComponent {
       };
 
       this.onAddHero(hero);
+
+      this.heroForm.reset();
+
+      console.log("collapse!!!")
+      this.sideNavCollapsed.set(true);
       
     } else {
       // Toaster message!

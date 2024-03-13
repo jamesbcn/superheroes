@@ -31,9 +31,9 @@ export class HeroesService {
 
   }
 
- updateHero(id:string,hero:Hero): Observable<any> {
+ updateHero(hero:Hero): Observable<any> {
 
-    return this.http.put<Hero>(`${this.API_URL}heroes/${id}`,hero)
+    return this.http.put<Hero>(`${this.API_URL}heroes/${hero.id}`,hero)
 
   }
 

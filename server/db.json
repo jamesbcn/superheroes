@@ -30228,6 +30228,24 @@
         "md": "",
         "lg": "../../../assets/img/avatar-xs.png"
       }
+    },
+    {
+      "id": "50a1",
+      "name": "ggg",
+      "powerstats": {
+        "intelligence": 66,
+        "strength": 66,
+        "speed": 66,
+        "durability": 66,
+        "power": 66,
+        "combat": 66
+      },
+      "images": {
+        "xs": "../../../assets/img/avatar-xs.png",
+        "sm": "",
+        "md": "",
+        "lg": "../../../assets/img/avatar-xs.png"
+      }
     }
   ]
 }
