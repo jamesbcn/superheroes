@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{data.name}}</h2>
+<mat-dialog-content>
+    <p>¿Estás seguro/a de que quieres borrar a {{data.name}}?</p>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+    <button mat-raised-button type="confirm" (click)="confirm()">Vale</button>
+    <button mat-raised-button type="button" (click)="close()">No gracias</button>
+</mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,12 +10,12 @@ import { MatIcon } from '@angular/material/icon';
 import { Store, select } from '@ngrx/store';
 import { heroesSelector } from '../../store/selectors';
 import { AppStateInterface } from '../../models/appState';
-import * as HeroesActions from '../../store/actions';
 import { HeroEditComponent } from '../hero-edit/hero-edit.component';
 import { TitleCasePipe } from '@angular/common';
 import { getSpanishPaginatorIntl } from './spanish-paginator.intl';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+import { HeroDeleteComponent } from '../hero-delete/hero-delete.component';
 
 /**
  * @title Table with pagination
@@ -78,23 +78,29 @@ export class HeroListComponent {
 
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
     dialogConfig.data = {...element,
                           powerstats: {...element.powerstats}
                         };
     
 
-      this.dialog.open(HeroEditComponent, dialogConfig);
+    this.dialog.open(HeroEditComponent, dialogConfig);
 
 
   }
 
 
 
-  async onDeleteHero(id: string) {
+  async onDeleteHero(id: string, name: string) {
 
-    this.store.dispatch(HeroesActions.deleteHero({ id: id }))
+    console.log(id)
+
+    const dialogConfig = new MatDialogConfig();
+
+    
+    dialogConfig.data = {id: id, name: name};
+    
+
+    this.dialog.open(HeroDeleteComponent, dialogConfig);
 
   }
 
