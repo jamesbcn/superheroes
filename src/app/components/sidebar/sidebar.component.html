@@ -2,48 +2,74 @@
     <h1>SUPERHÉROE NUEVO</h1>
 </div>
 <mat-card>
-    <mat-card-title>Crearlo aquí</mat-card-title>
+    <mat-card-title>¡Crearlo aquí!</mat-card-title>
     <mat-card-content>
         <form [formGroup]="heroForm" #formDirective="ngForm" (ngSubmit)="onSubmit(); formDirective.resetForm()">
             <mat-form-field>
-              <input matInput formControlName="name" placeholder="Name" />
-              <mat-error *ngIf="name?.invalid">Name is required</mat-error>
+              <input matInput formControlName="name" placeholder="Nombre" />
+              <mat-error *ngIf="heroForm.get('name')?.hasError('required')">
+                El nombre es obligatorio.
+              </mat-error>
             </mat-form-field>
           
             <mat-form-field>
-              <input matInput type="number" formControlName="intelligence" placeholder="Intelligence" />
-              <mat-error *ngIf="intelligence?.invalid">Intelligence is required</mat-error>
-              <mat-error *ngIf="intelligence?.invalid">Intelligence must be between 1 and 100</mat-error>
+              <input matInput type="number" formControlName="intelligence" placeholder="Intelligencia" />
+              <mat-error *ngIf="heroForm.get('intelligence')?.hasError('required')">
+                La inteligencia es obligatoria.
+              </mat-error>
+              <mat-error *ngIf="heroForm.get('intelligence')?.hasError('min') || heroForm.get('intelligence')?.hasError('max')">
+                Debe estar entre 1 y 100.
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="number" formControlName="strength" placeholder="strength" />
-                <mat-error *ngIf="strength?.invalid">strength is required</mat-error>
-                <mat-error *ngIf="strength?.invalid">strength must be between 1 and 100</mat-error>
+                <input matInput type="number" formControlName="strength" placeholder="Fuerza" />
+                <mat-error *ngIf="heroForm.get('strength')?.hasError('required')">
+                  La fuerza es obligatoria.
+                </mat-error>
+                <mat-error *ngIf="heroForm.get('strength')?.hasError('min') || heroForm.get('strength')?.hasError('max')">
+                  Debe estar entre 1 y 100.
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="number" formControlName="durability" placeholder="durability" />
-                <mat-error *ngIf="durability?.invalid">durability is required</mat-error>
-                <mat-error *ngIf="durability?.invalid">durability must be between 1 and 100</mat-error>
+                <input matInput type="number" formControlName="durability" placeholder="Durabilidad" />
+                <mat-error *ngIf="heroForm.get('durability')?.hasError('required')">
+                  La durabilidad es obligatoria.
+                </mat-error>
+                <mat-error *ngIf="heroForm.get('durability')?.hasError('min') || heroForm.get('durability')?.hasError('max')">
+                  Debe estar entre 1 y 100.
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="number" formControlName="power" placeholder="power" />
-                <mat-error *ngIf="power?.invalid">power is required</mat-error>
-                <mat-error *ngIf="power?.invalid">power must be between 1 and 100</mat-error>
+                <input matInput type="number" formControlName="power" placeholder="Poder" />
+                <mat-error *ngIf="heroForm.get('power')?.hasError('required')">
+                  El poder es obligatorio.
+                </mat-error>
+                <mat-error *ngIf="heroForm.get('power')?.hasError('min') || heroForm.get('power')?.hasError('max')">
+                  Debe estar entre 1 y 100.
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="number" formControlName="speed" placeholder="speed" />
-                <mat-error *ngIf="speed?.invalid">speed is required</mat-error>
-                <mat-error *ngIf="speed?.invalid">speed must be between 1 and 100</mat-error>
+                <input matInput type="number" formControlName="speed" placeholder="Velocidad" />
+                <mat-error *ngIf="heroForm.get('speed')?.hasError('required')">
+                  La velocidad es obligatoria.
+                </mat-error>
+                <mat-error *ngIf="heroForm.get('speed')?.hasError('min') || heroForm.get('speed')?.hasError('max')">
+                  Debe estar entre 1 y 100.
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field>
-                <input matInput type="number" formControlName="combat" placeholder="combat" />
-                <mat-error *ngIf="combat?.invalid">combat is required</mat-error>
-                <mat-error *ngIf="combat?.invalid">combat must be between 1 and 100</mat-error>
+                <input matInput type="number" formControlName="combat" placeholder="Combate" />
+                <mat-error *ngIf="heroForm.get('combat')?.hasError('required')">
+                  El combate es obligatorio.
+                </mat-error>
+                <mat-error *ngIf="heroForm.get('combat')?.hasError('min') || heroForm.get('combat')?.hasError('max')">
+                  Debe estar entre 1 y 100.
+                </mat-error>
               </mat-form-field>
           
             <button mat-raised-button type="submit" [disabled]="!heroForm.valid">Submit</button>

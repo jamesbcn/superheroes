@@ -1,15 +1,19 @@
-import {AfterViewInit, Component, ViewChild } from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatDialogModule, MatDialogConfig, MatDialog } from "@angular/material/dialog";
 import { Hero } from '../../models/hero';
 import { MatIcon } from '@angular/material/icon';
 import { Store, select } from '@ngrx/store';
 import { heroesSelector } from '../../store/selectors';
 import { AppStateInterface } from '../../models/appState';
 import * as HeroesActions from '../../store/actions';
+import { HeroEditComponent } from '../hero-edit/hero-edit.component';
+import { TitleCasePipe } from '@angular/common';
+import { getSpanishPaginatorIntl } from './spanish-paginator.intl';
 
 /**
  * @title Table with pagination
@@ -17,78 +21,68 @@ import * as HeroesActions from '../../store/actions';
 @Component({
   selector: 'app-hero-list',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, MatSortModule, MatFormFieldModule,
-    MatInputModule, MatIcon],
+  imports: [MatPaginatorModule, MatTableModule, MatSortModule, MatFormFieldModule, MatDialogModule,
+    MatInputModule, MatIcon, TitleCasePipe],
+  providers: [{ provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
   templateUrl: './hero-list.component.html',
   styleUrl: './hero-list.component.scss'
 })
-export class HeroListComponent implements AfterViewInit {
-  
+export class HeroListComponent {
+
   displayedColumns: string[] = ['name', 'intelligence', 'strength', 'speed', 'durability', 'power', 'combat', 'delete'];
   dataSource = new MatTableDataSource<Hero>([]);
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
 
-  constructor(private store: Store<AppStateInterface>) { }
+  constructor(private store: Store<AppStateInterface>, private dialog: MatDialog) { }
 
-  ngOnInit(){
-    
-    this.store.pipe( select(heroesSelector) ).subscribe(heroes => {
+  ngOnInit() {
 
-      if(this.paginator && this.sort) {
-      
-            this.dataSource = new MatTableDataSource<Hero>(heroes);
-            this.dataSource.paginator = this.paginator; 
-            this.dataSource.sort = this.sort;
-            
-          }
+    this.store.pipe(select(heroesSelector)).subscribe(heroes => {
+
+      if (this.paginator && this.sort) {
+
+        this.dataSource = new MatTableDataSource<Hero>(heroes);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      }
 
     })
   }
 
-  ngAfterViewInit() {
 
-        // this.store.pipe( select(heroesSelector) ).subscribe(heroes => {
-
-        //   if(this.paginator) {
-          
-        //         this.dataSource = new MatTableDataSource<Hero>(heroes);
-        //         this.dataSource.paginator = this.paginator; 
-                
-        //       }
-
-        // })
-        
-    
-
-
-  };
 
   doFilter(event: any) {
 
     let val = event.target.value;
     this.dataSource.filter = val.trim().toLocaleLowerCase();
   }
-  
-onEditHero(id:string) {
-    // await this.store.deleteHero(id);
-    // this.store.heroes();
 
-    // const updatedHeroes = this.store.heroes().filter(hero => hero.id !== id);
+  onEditHero(element: Hero) {
 
-    // this.tableRefresh(updatedHeroes)
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = element;
+    dialogConfig.height = '400px',
+    dialogConfig.width = '600px',
+
+    this.dialog.open(HeroEditComponent, dialogConfig);
+
+
+  }
+
+
+
+  async onDeleteHero(id: string) {
+
+    this.store.dispatch(HeroesActions.deleteHero({ id: id }))
 
   }
 
-  
-  
-  async onDeleteHero(id:string){
-    
-    this.store.dispatch(HeroesActions.deleteHero({id: id}))
-
-  }
-  
 
   // tableRefresh(updatedHeroes:Hero[]){
 
@@ -98,5 +92,5 @@ onEditHero(id:string) {
   //   }
   // }
 
-  
+
 }

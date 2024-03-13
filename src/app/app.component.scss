@@ -1,6 +1,7 @@
 mat-toolbar {
     position: relative;
     z-index: 5;
+    height: 100px
 }
 
 .toolbar-container {
@@ -20,7 +21,7 @@ mat-toolbar {
   }
 
 mat-sidenav-container {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 100px);
 }
 
 mat-sidenav, mat-sidenav-content {

@@ -1,0 +1,12 @@
+<mat-dialog-content>
+    
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+  </mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-button"(click)="close()">Close</button>
+    <button class="mat-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>

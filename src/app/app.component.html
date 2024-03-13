@@ -1,13 +1,12 @@
 <mat-toolbar class="mat-elevation-z3">
     <div class="toolbar-container">
-        <h1>{{collapsed }}</h1>
         <div class="box">
             <button mat-icon-button (click)="toggleMenu()">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
         <div class="box center">
-            <img src="../assets/img/logo.png" height="48px" alt="logo">
+            <img src="../assets/img/logo.png" height="100px" alt="logo">
         </div>
         <div class="box">
             
@@ -17,7 +16,7 @@
   <mat-sidenav-container>
   
   <mat-sidenav opened mode="side" [style.width]="sidenavWidth">
-      <app-sidebar [collapsed]="collapsed"></app-sidebar>
+      <app-sidebar></app-sidebar>
   </mat-sidenav>
       
   <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth">

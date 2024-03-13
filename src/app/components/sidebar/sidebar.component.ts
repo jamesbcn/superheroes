@@ -20,12 +20,6 @@ import * as HeroesActions from '../../store/actions';
 })
 export class SidebarComponent {
 
-  sideNavCollapsed = signal(false);
-  @Input() set collapsed(val: boolean){
-    this.sideNavCollapsed.set(val)
-  }
-
-
   heroForm: FormGroup;
   name: any;
   intelligence: any;
@@ -84,8 +78,6 @@ export class SidebarComponent {
 
       this.onAddHero(hero);
       
-    } else {
-      // Toaster message!
     }
   }
 

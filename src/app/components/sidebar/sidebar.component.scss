@@ -12,3 +12,39 @@
 :host * {
     transition: all 500ms ease-in-out;
 }
+
+
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1rem;
+  }
+  
+  mat-form-field {
+    width: 48%;
+    margin-bottom: 1rem;
+  }
+  
+  mat-error {
+    color: red;
+    font-size: 0.8rem;
+  }
+  
+  button[mat-raised-button] {
+    width: 100%;
+  }
+
+  h1 {
+    text-align: center; 
+    margin: 1rem 0; 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+  }
+  
+  mat-card-title {
+    text-align: center; 
+    margin: 0; 
+    font-size: 1.2rem;
+  }

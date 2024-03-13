@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { Store, select } from '@ngrx/store';
-import * as HeroesActions from './store/actions';
+import * as HeroesActions from './store/actions'
 import { AppStateInterface } from './models/appState';
 import { menuHiddenSelector } from './store/selectors';
 

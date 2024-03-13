@@ -10,14 +10,16 @@ th, td {
     display: flex;
     flex-direction: row;
     text-align: left !important;
+    gap: 25px;
     align-items: center;
-    gap: 25px;  
 }
 
 .last-col {
   display: flex;
-  flex-direction: row;
-  text-align: right;
-  align-items: center;
-  gap: 20px;  
+  flex-direction: row-reverse;
+  gap: 25px;
+}
+
+.mat-mdc-row {
+  height: 70px !important;
 }
