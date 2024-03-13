@@ -7,7 +7,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav'
-import { SearchComponent } from './components/search/search.component';
 import { Store } from '@ngrx/store';
 import * as HeroesActions from './store/actions'
 import { AppStateInterface } from './models/appState';
@@ -17,7 +16,7 @@ import { AppStateInterface } from './models/appState';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, SidebarComponent, LoadingComponent, MatToolbarModule, MatButtonModule, MatIconModule, 
-    MatSidenavModule, SearchComponent],
+    MatSidenavModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

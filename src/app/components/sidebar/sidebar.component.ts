@@ -1,6 +1,6 @@
-import { Component, Input, inject, signal } from '@angular/core';
+import { Component, Input, ViewChild, inject, signal } from '@angular/core';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card'
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -25,6 +25,7 @@ export class SidebarComponent {
     this.sideNavCollapsed.set(val)
   }
 
+
   heroForm: FormGroup;
   name: any;
   intelligence: any;
@@ -34,15 +35,11 @@ export class SidebarComponent {
   durability: any;
   strength: any;
   speed: any;
-  imageSizes = ['XS', 'SM', 'MD', 'LG'];
-  urlRegEx = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
   constructor(private store: Store, private fb: FormBuilder) {
 
     this.heroForm = this.fb.group({
       name: ['', Validators.required],
-      // image: ['', [Validators.required, Validators.pattern(this.urlRegEx)]],
-      // imageSize: ['', Validators.required],
       intelligence: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
       strength: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
       speed: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
@@ -85,10 +82,6 @@ export class SidebarComponent {
       };
 
       this.onAddHero(hero);
-
-      this.sideNavCollapsed.set(true);
-
-      
       
     } else {
       // Toaster message!

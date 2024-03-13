@@ -1,11 +1,12 @@
 <div class="page-container">
+  <div >
+    <mat-form-field>
+      <input matInput type="text" (keyup)="doFilter($event)" placeholder="Filtro">
+    </mat-form-field>
+  </div>
   <div class="mat-elevation-z8">
 
-    <div >
-      <mat-form-field>
-        <input matInput type="text" (keyup)="doFilter($event)" placeholder="Filtro">
-      </mat-form-field>
-    </div>
+    
 
     <table mat-table [dataSource]="dataSource" matSort>
   

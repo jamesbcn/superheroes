@@ -1,6 +1,7 @@
 export interface Hero {
     id: string;
     name: string;
+    editable: boolean;
     slug: string;
     powerstats: {
       intelligence: number;

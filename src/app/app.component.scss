@@ -6,12 +6,16 @@ mat-toolbar {
 .toolbar-container {
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .box {
     flex-grow: 1;
     padding: 10px;
     box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
 
   }
 
