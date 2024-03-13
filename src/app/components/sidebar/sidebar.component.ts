@@ -10,6 +10,8 @@ import { Store, select } from '@ngrx/store';
 import * as HeroesActions from '../../store/actions';
 import { menuHiddenSelector } from '../../store/selectors';
 import { AppStateInterface } from '../../models/appState';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 
 @Component({
@@ -21,6 +23,8 @@ import { AppStateInterface } from '../../models/appState';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+
+  private destroy$ = new Subject<void>();
 
   hidden = true;
   formFieldWidth = "1%";
@@ -40,12 +44,14 @@ export class SidebarComponent {
 
    ngOnInit():void {
     
-    this.store.pipe( select(menuHiddenSelector) ).subscribe(value =>{
-      this.hidden = value;
-      this.formFieldWidth = this.hidden ? "1%" : "48%";
-      this.fontSize = this.hidden ? "0rem" : "1.5rem";
-
-    })
+    this.store.pipe( 
+                    select(menuHiddenSelector),
+                    takeUntil(this.destroy$) )
+        .subscribe(value =>{
+        this.hidden = value;
+        this.formFieldWidth = this.hidden ? "1%" : "48%";
+        this.fontSize = this.hidden ? "0rem" : "1.5rem";
+        })
 
    }
 
@@ -78,6 +84,11 @@ export class SidebarComponent {
       this.onAddHero(hero);
       
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

@@ -14,6 +14,8 @@ import * as HeroesActions from '../../store/actions';
 import { HeroEditComponent } from '../hero-edit/hero-edit.component';
 import { TitleCasePipe } from '@angular/common';
 import { getSpanishPaginatorIntl } from './spanish-paginator.intl';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 /**
  * @title Table with pagination
@@ -37,9 +39,14 @@ export class HeroListComponent {
 
   constructor(private store: Store<AppStateInterface>, private dialog: MatDialog) { }
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit() {
 
-    this.store.pipe(select(heroesSelector)).subscribe(heroes => {
+    this.store.pipe(
+      select(heroesSelector),
+      takeUntil(this.destroy$)
+      ).subscribe(heroes => {
 
       if (this.paginator && this.sort) {
 
@@ -92,13 +99,10 @@ export class HeroListComponent {
   }
 
 
-  // tableRefresh(updatedHeroes:Hero[]){
-
-  //   this.dataSource = new MatTableDataSource<Hero>(updatedHeroes);
-  //   if(this.paginator) {
-  //     this.dataSource.paginator = this.paginator;
-  //   }
-  // }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
 
 }

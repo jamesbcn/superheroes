@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -11,6 +11,8 @@ import { Store, select } from '@ngrx/store';
 import * as HeroesActions from './store/actions'
 import { AppStateInterface } from './models/appState';
 import { menuHiddenSelector } from './store/selectors';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 
 @Component({
@@ -21,26 +23,36 @@ import { menuHiddenSelector } from './store/selectors';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+
+  private destroy$ = new Subject<void>();
 
   menuHidden = false;
   sidenavWidth = '0px';
 
   constructor(private store: Store<AppStateInterface>){ }
 
-  ngOnInit(){
+  ngOnInit(): void {
 
     this.store.dispatch(HeroesActions.getHeroes());
 
-    this.store.pipe( select(menuHiddenSelector) ).subscribe(value =>{
-      this.menuHidden = value;
-      this.sidenavWidth =  this.menuHidden ? '0px' : '650px';
-    })
+    this.store.pipe( 
+                    select(menuHiddenSelector),
+                    takeUntil(this.destroy$) )
+      .subscribe(value =>{
+        this.menuHidden = value;
+        this.sidenavWidth =  this.menuHidden ? '0px' : '650px';
+      })
     
   }
 
-  toggleMenu(){
+  toggleMenu(): void {
     this.store.dispatch(HeroesActions.changeMenuToggle());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 

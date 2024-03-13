@@ -29852,6 +29852,18 @@
         "md": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/md/731-zoom.jpg",
         "lg": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/lg/731-zoom.jpg"
       }
+    },
+    {
+      "id": "4b1d",
+      "name": "james",
+      "powerstats": {
+        "intelligence": 77,
+        "strength": 77,
+        "speed": 77,
+        "durability": 77,
+        "power": 77,
+        "combat": 77
+      }
     }
   ]
 }

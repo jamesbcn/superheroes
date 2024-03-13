@@ -15,7 +15,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
         <td mat-cell *matCellDef="let element"> 
           <div class="first-col">
-            @if(element.images.xs){
+            @if(element.images && element.images.xs){
               <div><img [src]="element.images.xs" alt="Avatar"></div>
             }@else{
               <div><img src="../../../assets/img/avatar-xs.png" alt="Avatar"></div>

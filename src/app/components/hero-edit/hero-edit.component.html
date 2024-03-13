@@ -3,7 +3,12 @@
   <div class="edit-container">
 
     <div>
-      <img mat-card-image [src]="data.images.lg" height="100%" alt="Imágen">
+      @if(data.images && data.images.lg){
+        <img mat-card-image [src]="data.images.lg" alt="Imágen">
+      }@else{
+        <div><img mat-card-image src="../../../assets/img/avatar-lg.png" alt="Sin imágen"></div>
+      }
+      
     </div>
 
     <div class="card-container">
@@ -68,7 +73,7 @@
             
             <div class="buttons-container">
               <button mat-raised-button type="submit" [disabled]="!heroForm.valid">Enviar</button>
-              <button mat-raised-button (click)="close()">Cerrar</button>
+              <button mat-raised-button type="button" (click)="close()">Cerrar</button>
             </div>
           </form>
         </mat-card-content>
