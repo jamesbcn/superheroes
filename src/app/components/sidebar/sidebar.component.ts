@@ -6,8 +6,9 @@ import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/m
 import { MatOption, MatSelect } from '@angular/material/select';
 import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
-import { HeroesStore } from '../../store/heroes.store';
 import { Hero } from '../../models/hero';
+import { Store } from '@ngrx/store';
+import * as HeroesActions from '../../store/actions'
 
 @Component({
   selector: 'app-sidebar',
@@ -18,8 +19,6 @@ import { Hero } from '../../models/hero';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-
-  store = inject(HeroesStore);
 
   sideNavCollapsed = signal(false);
   @Input() set collapsed(val: boolean){
@@ -38,7 +37,7 @@ export class SidebarComponent {
   imageSizes = ['XS', 'SM', 'MD', 'LG'];
   urlRegEx = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
-  constructor(private fb: FormBuilder) {
+  constructor(private store: Store, private fb: FormBuilder) {
 
     this.heroForm = this.fb.group({
       name: ['', Validators.required],
@@ -56,7 +55,7 @@ export class SidebarComponent {
 
    async onAddHero(hero:Partial<Hero>) {
 
-      await this.store.addHero(hero)
+      //await this.store.addHero(hero)
 
    }
 

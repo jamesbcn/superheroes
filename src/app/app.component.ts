@@ -8,9 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { SearchComponent } from './components/search/search.component';
-import { HeroesService } from './services/heroes.service';
-import { HeroesStore } from './store/heroes.store';
-
+import { Store } from '@ngrx/store';
+import * as HeroesActions from './store/actions'
+import { AppStateInterface } from './models/appState';
 
 
 @Component({
@@ -23,17 +23,16 @@ import { HeroesStore } from './store/heroes.store';
 })
 export class AppComponent {
 
-  store = inject(HeroesStore)
+  constructor(private store: Store<AppStateInterface>){ }
   
   collapsed = signal(true);
   sidenavWidth = computed(() => this.collapsed() ? '0px' : '650px')
 
   ngOnInit(){
-    this.loadHeroes()
-          .then(() => console.log("Heroes están listados!", this.store.heroes()))
+
+    this.store.dispatch(HeroesActions.getHeroes());
+    
   }
 
-  async loadHeroes() {
-    await this.store.loadAll();
-  }
+
 }

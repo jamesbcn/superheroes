@@ -1,11 +1,11 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ViewChild, inject} from '@angular/core';
+import {AfterViewInit, Component, ViewChild } from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Hero } from '../../models/hero';
-import { LoadingService } from '../../services/loading.service';
-import { HeroesService } from '../../services/heroes.service';
-import { HeroesStore } from '../../store/heroes.store';
 import { MatIcon } from '@angular/material/icon';
+import { Store, select } from '@ngrx/store';
+import { heroesSelector } from '../../store/selectors';
+import { AppStateInterface } from '../../models/appState';
 
 /**
  * @title Table with pagination
@@ -19,55 +19,58 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class HeroListComponent implements AfterViewInit {
   
-  store = inject(HeroesStore);
-
   displayedColumns: string[] = ['name', 'intelligence', 'strength', 'speed', 'durability', 'power', 'combat', 'delete'];
-  dataSource = new MatTableDataSource<Hero>(this.store.heroes());
+  dataSource = new MatTableDataSource<Hero>([]);
+
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
-  constructor(private heroesService: HeroesService, private loading: LoadingService,
-              private cd: ChangeDetectorRef) { }
+  constructor(private store: Store<AppStateInterface>) { }
 
   ngOnInit(){
     // this.loading.loadingOn();
   }
 
   ngAfterViewInit() {
-    
-        // temporary solution
-        setTimeout(() => {
+
+        this.store.pipe( select(heroesSelector) ).subscribe(heroes => {
+
           if(this.paginator) {
           
-            this.dataSource = new MatTableDataSource<Hero>(this.store.heroes());
-            this.dataSource.paginator = this.paginator; 
-            
-          }
-        }, 500)
+                this.dataSource = new MatTableDataSource<Hero>(heroes);
+                this.dataSource.paginator = this.paginator; 
+                
+              }
 
-  }
+        })
+        
+    
 
-  async onEditHero(id:string) {
-    await this.store.deleteHero(id);
-    this.store.heroes();
 
-    const updatedHeroes = this.store.heroes().filter(hero => hero.id !== id);
+  };
+  
+async onEditHero(id:string) {
+    // await this.store.deleteHero(id);
+    // this.store.heroes();
 
-    this.tableRefresh(updatedHeroes)
+    // const updatedHeroes = this.store.heroes().filter(hero => hero.id !== id);
+
+    // this.tableRefresh(updatedHeroes)
 
   }
 
   
   
   async onDeleteHero(id:string){
-    await this.store.deleteHero(id);
-    this.store.heroes();
+    // await this.store.deleteHero(id);
+    // this.store.heroes();
 
-    const updatedHeroes = this.store.heroes().filter(hero => hero.id !== id);
+    // const updatedHeroes = this.store.heroes().filter(hero => hero.id !== id);
 
-    this.tableRefresh(updatedHeroes)
+    // this.tableRefresh(updatedHeroes)
 
   }
+  
 
   tableRefresh(updatedHeroes:Hero[]){
 
