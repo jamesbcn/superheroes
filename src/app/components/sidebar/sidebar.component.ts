@@ -1,50 +1,55 @@
-import { Component, Input, ViewChild, inject, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card'
-import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
-import { MatOption, MatSelect } from '@angular/material/select';
 import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { Hero } from '../../models/hero';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as HeroesActions from '../../store/actions';
+import { menuHiddenSelector } from '../../store/selectors';
+import { AppStateInterface } from '../../models/appState';
+
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ReactiveFormsModule, MatCard, MatCardContent, MatCardTitle, MatError, MatFormField, MatLabel, MatSelect, 
-            MatButton, MatOption, NgIf, MatInputModule],
+  imports: [ReactiveFormsModule, MatCard, MatCardContent, MatCardTitle, MatError, MatFormField, MatLabel,
+            MatButton, NgIf, MatInputModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
 
-  heroForm: FormGroup;
-  name: any;
-  intelligence: any;
-  image: any;
-  combat: any;
-  power: any;
-  durability: any;
-  strength: any;
-  speed: any;
+  hidden = true;
+  formFieldWidth = "1%";
+  fontSize = "0rem";
 
-  constructor(private store: Store, private fb: FormBuilder) {
+  heroForm = this.fb.group({
+    name: ['', Validators.required],
+    intelligence: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
+    strength: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
+    speed: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
+    durability: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
+    power: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
+    combat: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
+  });
 
-    this.heroForm = this.fb.group({
-      name: ['', Validators.required],
-      intelligence: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      strength: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      speed: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      durability: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      power: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-      combat: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-    });
+  constructor(private store: Store<AppStateInterface>, private fb: FormBuilder) {}
+
+   ngOnInit():void {
+    
+    this.store.pipe( select(menuHiddenSelector) ).subscribe(value =>{
+      this.hidden = value;
+      this.formFieldWidth = this.hidden ? "1%" : "48%";
+      this.fontSize = this.hidden ? "0rem" : "1.5rem";
+
+    })
 
    }
 
-   onAddHero(hero:Partial<Hero>) {
+   onAddHero(hero:Partial<Hero>):void {
 
       this.store.dispatch(HeroesActions.addHero({hero: hero}));
       this.store.dispatch(HeroesActions.changeMenuToggle());
@@ -53,12 +58,12 @@ export class SidebarComponent {
 
 
 
-   onSubmit() {
+   onSubmit():void {
     console.log(this.heroForm);
     if (this.heroForm.valid) {
       
       const f = this.heroForm.value;
-      const hero = {
+      const hero: object = {
         name: f.name,
         powerstats: {
                 intelligence: f.intelligence,
@@ -67,12 +72,6 @@ export class SidebarComponent {
                 durability: f.durability,
                 power: f.power,
                 combat: f.combat
-        },
-        images: {
-          xs: (f.imageSize === 'xs') ? f.image : '../../../assets/img/avatar-xs.png',
-          sm: "",
-          md: "",
-          lg: (f.imageSize === 'lg') ? f.image : '../../../assets/img/avatar-xs.png'
         }
       };
 

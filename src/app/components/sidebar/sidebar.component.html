@@ -1,18 +1,18 @@
 <div class="sidenav-header">
-    <h1>SUPERHÉROE NUEVO</h1>
+    <h1 [style.font-size]="fontSize">SUPERHÉROE NUEVO</h1>
 </div>
 <mat-card>
-    <mat-card-title>¡Crearlo aquí!</mat-card-title>
+    <mat-card-title [style.font-size]="fontSize">¡Crearlo aquí!</mat-card-title>
     <mat-card-content>
-        <form [formGroup]="heroForm" #formDirective="ngForm" (ngSubmit)="onSubmit(); formDirective.resetForm()">
-            <mat-form-field>
+        <form [formGroup]="heroForm" #formDirective="ngForm" autocomplete="off" (ngSubmit)="onSubmit(); formDirective.resetForm()">
+            <mat-form-field [style.width]="formFieldWidth">
               <input matInput formControlName="name" placeholder="Nombre" />
               <mat-error *ngIf="heroForm.get('name')?.hasError('required')">
                 El nombre es obligatorio.
               </mat-error>
             </mat-form-field>
           
-            <mat-form-field>
+            <mat-form-field [style.width]="formFieldWidth">
               <input matInput type="number" formControlName="intelligence" placeholder="Intelligencia" />
               <mat-error *ngIf="heroForm.get('intelligence')?.hasError('required')">
                 La inteligencia es obligatoria.
@@ -22,7 +22,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field [style.width]="formFieldWidth">
                 <input matInput type="number" formControlName="strength" placeholder="Fuerza" />
                 <mat-error *ngIf="heroForm.get('strength')?.hasError('required')">
                   La fuerza es obligatoria.
@@ -32,7 +32,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field [style.width]="formFieldWidth">
                 <input matInput type="number" formControlName="durability" placeholder="Durabilidad" />
                 <mat-error *ngIf="heroForm.get('durability')?.hasError('required')">
                   La durabilidad es obligatoria.
@@ -42,7 +42,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field [style.width]="formFieldWidth">
                 <input matInput type="number" formControlName="power" placeholder="Poder" />
                 <mat-error *ngIf="heroForm.get('power')?.hasError('required')">
                   El poder es obligatorio.
@@ -52,7 +52,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field [style.width]="formFieldWidth">
                 <input matInput type="number" formControlName="speed" placeholder="Velocidad" />
                 <mat-error *ngIf="heroForm.get('speed')?.hasError('required')">
                   La velocidad es obligatoria.
@@ -62,7 +62,7 @@
                 </mat-error>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field [style.width]="formFieldWidth">
                 <input matInput type="number" formControlName="combat" placeholder="Combate" />
                 <mat-error *ngIf="heroForm.get('combat')?.hasError('required')">
                   El combate es obligatorio.

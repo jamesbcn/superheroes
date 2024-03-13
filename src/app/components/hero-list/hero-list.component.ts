@@ -55,9 +55,15 @@ export class HeroListComponent {
 
 
   doFilter(event: any) {
+    const val = event.target.value.trim().toLocaleLowerCase();
+    this.dataSource.filter = val;
 
-    let val = event.target.value;
-    this.dataSource.filter = val.trim().toLocaleLowerCase();
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+
+      return data.name.toLocaleLowerCase().includes(filter);
+    };
+
+    
   }
 
   onEditHero(element: Hero) {
@@ -66,11 +72,12 @@ export class HeroListComponent {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = element;
-    dialogConfig.height = '400px',
-    dialogConfig.width = '600px',
+    dialogConfig.data = {...element,
+                          powerstats: {...element.powerstats}
+                        };
+    
 
-    this.dialog.open(HeroEditComponent, dialogConfig);
+      this.dialog.open(HeroEditComponent, dialogConfig);
 
 
   }

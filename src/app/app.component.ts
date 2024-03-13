@@ -23,7 +23,7 @@ import { menuHiddenSelector } from './store/selectors';
 })
 export class AppComponent {
 
-  collapsed = false;
+  menuHidden = false;
   sidenavWidth = '0px';
 
   constructor(private store: Store<AppStateInterface>){ }
@@ -33,8 +33,8 @@ export class AppComponent {
     this.store.dispatch(HeroesActions.getHeroes());
 
     this.store.pipe( select(menuHiddenSelector) ).subscribe(value =>{
-      this.collapsed = value;
-      this.sidenavWidth =  this.collapsed ? '0px' : '650px';
+      this.menuHidden = value;
+      this.sidenavWidth =  this.menuHidden ? '0px' : '650px';
     })
     
   }
