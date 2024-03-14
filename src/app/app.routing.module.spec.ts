@@ -42,4 +42,10 @@ describe("Router: App", () => {
     expect(done).toBeTruthy();
   }));
 
+  it('navigate to invalid path redirects you to /404', fakeAsync(() => {
+    router.navigate(['zzzzz']);
+    tick(); 
+    expect(location.path()).toBe('/404');
+  }));
+
 });

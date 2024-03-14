@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card'
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { Hero } from '../../models/hero';
@@ -44,14 +44,14 @@ export class SidebarComponent {
 
    ngOnInit():void {
     
-    this.store.pipe( 
-                    select(menuHiddenSelector),
-                    takeUntil(this.destroy$) )
-        .subscribe(value =>{
-        this.hidden = value;
-        this.formFieldWidth = this.hidden ? "1%" : "48%";
-        this.fontSize = this.hidden ? "0rem" : "1.5rem";
-        })
+      this.store.pipe( 
+                      select(menuHiddenSelector),
+                      takeUntil(this.destroy$) )
+                        .subscribe(value =>{
+                                              this.hidden = value;
+                                              this.formFieldWidth = this.hidden ? "1%" : "48%";
+                                              this.fontSize = this.hidden ? "0rem" : "1.5rem";
+                        })
 
    }
 
