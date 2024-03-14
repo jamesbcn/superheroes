@@ -10,75 +10,77 @@
       }
       
     </div>
+    @if(data.powerstats){
+      <div class="card-container">
+        <mat-card>
+          <mat-card-content>
+            <form #heroForm="ngForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+              <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput name="name" [(ngModel)]="data.name" #name="ngModel" required />
+                <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+                  El nombre es obligatorio.
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-label>Inteligencia</mat-label>
+                <input matInput type="number" name="intelligence" [(ngModel)]="data.powerstats.intelligence" #intelligence="ngModel" required />
+                <mat-error *ngIf="intelligence.invalid && (intelligence.dirty || intelligence.touched)">
+                  La inteligencia es obligatoria.
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-label>Fuerza</mat-label>
+                <input matInput type="number" name="strength" [(ngModel)]="data.powerstats.strength" #strength="ngModel" required />
+                <mat-error *ngIf="strength.invalid && (strength.dirty || strength.touched)">
+                  La fuerza es obligatoria.
+                </mat-error>
+              </mat-form-field>
+      
+              <mat-form-field>
+                <mat-label>Durabilidad</mat-label>
+                <input matInput type="number" name="durability" [(ngModel)]="data.powerstats.durability" #durability="ngModel" required />
+                <mat-error *ngIf="durability.invalid && (durability.dirty || durability.touched)">
+                  La durabilidad es obligatoria.
+                </mat-error>
+              </mat-form-field>
+      
+              <mat-form-field>
+                <mat-label>Poder</mat-label>
+                <input matInput type="number" name="power" [(ngModel)]="data.powerstats.power" #power="ngModel" required />
+                <mat-error *ngIf="power.invalid && (power.dirty || power.touched)">
+                  El poder es obligatorio.
+                </mat-error>
+              </mat-form-field>
+      
+              <mat-form-field>
+                <mat-label>Velocidad</mat-label>
+                <input matInput type="number" name="speed" [(ngModel)]="data.powerstats.speed" #speed="ngModel" required />
+                <mat-error *ngIf="speed.invalid && (speed.dirty || speed.touched)">
+                  La velocidad es obligatoria.
+                </mat-error>
+              </mat-form-field>
+      
+              <mat-form-field>
+                <mat-label>Combate</mat-label>
+                <input matInput type="number" name="combat" [(ngModel)]="data.powerstats.combat" #combat="ngModel" required />
+                <mat-error *ngIf="combat.invalid && (combat.dirty || combat.touched)">
+                  El combate es obligatorio.
+                </mat-error>
+              </mat-form-field>
+              
+              <div class="buttons-container">
+                <button mat-raised-button type="submit" [disabled]="!heroForm.valid">Enviar</button>
+                <button mat-raised-button type="button" (click)="close()">Cerrar</button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
 
-    <div class="card-container">
-      <mat-card>
-        <mat-card-content>
-          <form #heroForm="ngForm" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
-            <mat-form-field>
-              <mat-label>Nombre</mat-label>
-              <input matInput name="name" [(ngModel)]="data.name" #name="ngModel" required />
-              <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
-                El nombre es obligatorio.
-              </mat-error>
-            </mat-form-field>
-            
-            <mat-form-field>
-              <mat-label>Inteligencia</mat-label>
-              <input matInput type="number" name="intelligence" [(ngModel)]="data.powerstats.intelligence" #intelligence="ngModel" required />
-              <mat-error *ngIf="intelligence.invalid && (intelligence.dirty || intelligence.touched)">
-                La inteligencia es obligatoria.
-              </mat-error>
-            </mat-form-field>
-            
-            <mat-form-field>
-              <mat-label>Fuerza</mat-label>
-              <input matInput type="number" name="strength" [(ngModel)]="data.powerstats.strength" #strength="ngModel" required />
-              <mat-error *ngIf="strength.invalid && (strength.dirty || strength.touched)">
-                La fuerza es obligatoria.
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field>
-              <mat-label>Durabilidad</mat-label>
-              <input matInput type="number" name="durability" [(ngModel)]="data.powerstats.durability" #durability="ngModel" required />
-              <mat-error *ngIf="durability.invalid && (durability.dirty || durability.touched)">
-                La durabilidad es obligatoria.
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field>
-              <mat-label>Poder</mat-label>
-              <input matInput type="number" name="power" [(ngModel)]="data.powerstats.power" #power="ngModel" required />
-              <mat-error *ngIf="power.invalid && (power.dirty || power.touched)">
-                El poder es obligatorio.
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field>
-              <mat-label>Velocidad</mat-label>
-              <input matInput type="number" name="speed" [(ngModel)]="data.powerstats.speed" #speed="ngModel" required />
-              <mat-error *ngIf="speed.invalid && (speed.dirty || speed.touched)">
-                La velocidad es obligatoria.
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field>
-              <mat-label>Combate</mat-label>
-              <input matInput type="number" name="combat" [(ngModel)]="data.powerstats.combat" #combat="ngModel" required />
-              <mat-error *ngIf="combat.invalid && (combat.dirty || combat.touched)">
-                El combate es obligatorio.
-              </mat-error>
-            </mat-form-field>
-            
-            <div class="buttons-container">
-              <button mat-raised-button type="submit" [disabled]="!heroForm.valid">Enviar</button>
-              <button mat-raised-button type="button" (click)="close()">Cerrar</button>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
 
   </div>
 </mat-dialog-content>

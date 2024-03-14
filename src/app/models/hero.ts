@@ -12,7 +12,7 @@ export interface Hero {
     };
     appearance: {
       gender: string;
-      race: string;
+      race: string | null;
       height: string[];
       weight: string[];
       eyeColor: string;
@@ -20,11 +20,11 @@ export interface Hero {
     };
     biography: {
       fullName: string;
-      alterEgos: string[];
+      alterEgos: string | string[];
       aliases: string[];
       placeOfBirth: string;
       firstAppearance: string;
-      publisher: string;
+      publisher: string | null;
       alignment: string;
     };
     work: {

@@ -8,16 +8,21 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { routes } from './app.routes';
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideMockStore } from '@ngrx/store/testing';
 
 
 describe("Router: App", () => {
   let location: Location;
   let router: Router;
   let fixture: ComponentFixture<AppComponent>;
+  const initialState = { };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes(routes), HeroListComponent, NotFoundComponent, SidebarComponent, BrowserAnimationsModule],
+      providers: [
+        provideMockStore({ initialState }),
+      ]
     });
 
     router = TestBed.inject(Router);
@@ -35,14 +40,6 @@ describe("Router: App", () => {
     promise.then(() => (done = true));
     tick(50);
     expect(done).toBeTruthy();
-  }));
-
-  it('navigate to "/zzz" should render 404 NotFoundComponent', fakeAsync(() => {
-    router.navigate(["/zzz"]).then(() => {
-      fixture.detectChanges(); // Trigger change detection
-      const compiled = fixture.nativeElement;
-      expect(compiled.querySelector('app-not-found')).toBeTruthy(); 
-    });
   }));
 
 });

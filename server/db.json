@@ -7,7 +7,7 @@
       "powerstats": {
         "intelligence": 50,
         "strength": 28,
-        "speed": 42,
+        "speed": 66,
         "durability": 90,
         "power": 57,
         "combat": 60
@@ -29427,18 +29427,6 @@
         "sm": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/731-zoom.jpg",
         "md": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/md/731-zoom.jpg",
         "lg": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/lg/731-zoom.jpg"
-      }
-    },
-    {
-      "id": "4b1d",
-      "name": "james",
-      "powerstats": {
-        "intelligence": 77,
-        "strength": 77,
-        "speed": 77,
-        "durability": 77,
-        "power": 77,
-        "combat": 77
       }
     }
   ]

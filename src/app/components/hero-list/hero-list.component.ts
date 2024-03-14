@@ -17,9 +17,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { HeroDeleteComponent } from '../hero-delete/hero-delete.component';
 
-/**
- * @title Table with pagination
- */
+
 @Component({
   selector: 'app-hero-list',
   standalone: true,
@@ -81,10 +79,8 @@ export class HeroListComponent {
     dialogConfig.data = {...element,
                           powerstats: {...element.powerstats}
                         };
-    
 
     this.dialog.open(HeroEditComponent, dialogConfig);
-
 
   }
 
@@ -92,13 +88,9 @@ export class HeroListComponent {
 
   async onDeleteHero(id: string, name: string) {
 
-    console.log(id)
-
     const dialogConfig = new MatDialogConfig();
 
-    
     dialogConfig.data = {id: id, name: name};
-    
 
     this.dialog.open(HeroDeleteComponent, dialogConfig);
 

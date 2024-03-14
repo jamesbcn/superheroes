@@ -1,12 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card'
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
-import { MatButton } from '@angular/material/button';
 import {
-  MatDialog,
   MAT_DIALOG_DATA,
   MatDialogRef,
   MatDialogTitle,
@@ -30,18 +28,8 @@ import * as HeroesActions from '../../store/actions';
 })
 export class HeroEditComponent {
 
-  heroForm = this.fb.group({
-    name: ['', Validators.required],
-    intelligence: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-    strength: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-    speed: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-    durability: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-    power: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-    combat: [null, [Validators.required, Validators.min(1), Validators.max(100)]],
-  });
-
   constructor(
-    private store: Store<AppStateInterface>, private fb: FormBuilder,
+    private store: Store<AppStateInterface>,
     public dialogRef: MatDialogRef<HeroEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Hero,
   ) {}
@@ -51,8 +39,6 @@ export class HeroEditComponent {
   }
 
   onSubmit(): void{
-    console.log(this.data)
-
     this.store.dispatch(HeroesActions.updateHero({hero: this.data}));
     this.close();
   }
