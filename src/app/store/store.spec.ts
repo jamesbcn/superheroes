@@ -4,7 +4,6 @@ import { initialState, reducers } from './reducers';
 import * as HeroesActions from './actions';
 import * as HeroesSelectors from './selectors';
 import { Hero } from '../models/hero';
-import { HeroesState } from '../models/heroesState';
 
 describe('NgRx Store', () => {
   let store: MockStore;
