@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { AppStateInterface } from '../../models/appState';
+import { AppStateInterface } from '../../interfaces/appState';
 import { Store } from '@ngrx/store';
 import * as HeroesActions from '../../store/actions';
 

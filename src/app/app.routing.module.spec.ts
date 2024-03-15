@@ -6,7 +6,7 @@ import { HeroListComponent } from './components/hero-list/hero-list.component';
 import { AppComponent } from "./app.component";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { routes } from './app.routes';
-import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { HeroAddComponent } from "./components/hero-add/hero-add.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideMockStore } from '@ngrx/store/testing';
 
@@ -19,7 +19,8 @@ describe("Router: App", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes), HeroListComponent, NotFoundComponent, SidebarComponent, BrowserAnimationsModule],
+      imports: [RouterTestingModule.withRoutes(routes), HeroListComponent, NotFoundComponent, HeroAddComponent
+        , BrowserAnimationsModule],
       providers: [
         provideMockStore({ initialState }),
       ]

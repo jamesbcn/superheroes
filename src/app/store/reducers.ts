@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import {HeroesState} from '../models/heroesState';
+import {HeroesState} from '../interfaces/heroesState';
 import * as HeroesActions from './actions'
-import { Hero } from '../models/hero';
+import { Hero } from '../interfaces/hero';
 
 
 export const initialState: HeroesState = {

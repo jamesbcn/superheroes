@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideMockStore } from '@ngrx/store/testing';
-import { SidebarComponent } from './sidebar.component';
+import { HeroAddComponent } from './hero-add.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-describe('SidebarComponent', () => {
-  let component: SidebarComponent;
-  let fixture: ComponentFixture<SidebarComponent>;
+describe('HeroAddComponent', () => {
+  let component: HeroAddComponent;
+  let fixture: ComponentFixture<HeroAddComponent>;
   const initialState = { };
   let myFormGroup: FormGroup;
   let submitButton: DebugElement;
@@ -16,7 +16,7 @@ describe('SidebarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        SidebarComponent,
+        HeroAddComponent,
         BrowserAnimationsModule,
         FormsModule, ReactiveFormsModule,
       ],
@@ -26,7 +26,7 @@ describe('SidebarComponent', () => {
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SidebarComponent);
+    fixture = TestBed.createComponent(HeroAddComponent);
     component = fixture.componentInstance;
     myFormGroup = component.heroForm;
     fixture.detectChanges();

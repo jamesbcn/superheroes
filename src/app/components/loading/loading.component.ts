@@ -3,7 +3,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Component, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { isLoadingSelector } from '../../store/selectors';
-import { AppStateInterface } from '../../models/appState';
+import { AppStateInterface } from '../../interfaces/appState';
 
 @Component({
   selector: 'app-loading',

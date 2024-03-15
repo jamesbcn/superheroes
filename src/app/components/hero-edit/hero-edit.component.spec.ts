@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideMockStore } from '@ngrx/store/testing';
 import { HeroEditComponent } from './hero-edit.component';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import { Hero } from '../../models/hero';
+import { Hero } from '../../interfaces/hero';
 import { By } from '@angular/platform-browser';
 
 describe('HeroEditComponent', () => {

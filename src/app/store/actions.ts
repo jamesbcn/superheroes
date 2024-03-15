@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Hero } from "../models/hero";
+import { Hero } from "../interfaces/hero";
 
 export const getHeroes = createAction('[Heroes] Get Heroes');
 export const getHeroesSuccess = createAction('[Heroes] Get Heroes Success', props<{heroes: Hero[] | undefined}>() );

@@ -13,9 +13,9 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import { Hero } from '../../models/hero';
+import { Hero } from '../../interfaces/hero';
 import { Store } from '@ngrx/store';
-import { AppStateInterface } from '../../models/appState';
+import { AppStateInterface } from '../../interfaces/appState';
 import * as HeroesActions from '../../store/actions';
 
 @Component({

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, exhaustMap, of } from 'rxjs';
 import { HeroesService } from '../services/heroes.service';
 import * as HeroesActions from './actions';
-import { Hero } from '../models/hero';
+import { Hero } from '../interfaces/hero';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable()

@@ -5,24 +5,24 @@ import { MatInputModule } from '@angular/material/input';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
-import { Hero } from '../../models/hero';
+import { Hero } from '../../interfaces/hero';
 import { Store, select } from '@ngrx/store';
 import * as HeroesActions from '../../store/actions';
 import { menuHiddenSelector } from '../../store/selectors';
-import { AppStateInterface } from '../../models/appState';
+import { AppStateInterface } from '../../interfaces/appState';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-hero-add',
   standalone: true,
   imports: [ReactiveFormsModule, MatCard, MatCardContent, MatCardTitle, MatError, MatFormField, MatLabel,
             MatButton, NgIf, MatInputModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  templateUrl: './hero-add.component.html',
+  styleUrl: './hero-add.component.scss'
 })
-export class SidebarComponent {
+export class HeroAddComponent {
 
   private destroy$ = new Subject<void>();
 

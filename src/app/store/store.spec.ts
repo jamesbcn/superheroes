@@ -3,7 +3,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { initialState, reducers } from './reducers';
 import * as HeroesActions from './actions';
 import * as HeroesSelectors from './selectors';
-import { Hero } from '../models/hero';
+import { Hero } from '../interfaces/hero';
 
 describe('NgRx Store', () => {
   let store: MockStore;
