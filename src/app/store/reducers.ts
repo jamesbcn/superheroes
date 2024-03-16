@@ -30,7 +30,7 @@ export const reducers = createReducer(
 
     on(HeroesActions.addHero, (state) => ({ ...state, isLoading: true })),
     on(HeroesActions.addHeroSuccess, (state, action) => {
-      const updatedHeroes = state.heroes ? [...state.heroes, action.hero] : [action.hero];
+      const updatedHeroes = [...state.heroes, action.hero];
       return {
         ...state,
         isLoading: false,

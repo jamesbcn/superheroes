@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class HeroesEffects {
 
-  private toastr = inject(ToastrService);
+  constructor(private actions$: Actions, private heroesService: HeroesService, private toastr: ToastrService) { }
 
   getHeroes$ = createEffect(() =>
     this.actions$.pipe(
@@ -19,7 +19,11 @@ export class HeroesEffects {
 
           map((heroes: Hero[] | undefined) => {
 
-            this.toastr.success('¡Heroes listos!');
+            if(heroes === undefined){
+              throw new Error("Unexpected state: getHeroes service returned undefined");
+            }
+
+            this.toastr.success('¡Héroes listos!');
             return HeroesActions.getHeroesSuccess({ heroes })
           }),
 
@@ -43,6 +47,10 @@ export class HeroesEffects {
         return this.heroesService.addHero(hero).pipe(
           map((updatedHero: Hero | undefined) => {
 
+          if(updatedHero === undefined){
+              throw new Error("Unexpected state: 'addHero' service returned undefined");
+          }
+
           this.toastr.success('Hero added successfully!');
 
           return HeroesActions.addHeroSuccess({ hero: updatedHero })  
@@ -64,7 +72,13 @@ export class HeroesEffects {
         const hero: Hero = action.hero;
         return this.heroesService.updateHero(hero).pipe(
           map((updatedHero: Hero | undefined) => {
+
+            if(updatedHero === undefined){
+              throw new Error("Unexpected state: 'updatedHero' service returned undefined");
+            }
+
             this.toastr.success('¡Heroe actualizado con éxito!');
+
             return HeroesActions.updateHeroSuccess({ hero: updatedHero });
           }),
           catchError((error) => {
@@ -82,7 +96,7 @@ export class HeroesEffects {
       ofType(HeroesActions.deleteHero),
       exhaustMap((action) => {
         return this.heroesService.deleteHero(action.id).pipe(
-          map((id: string) => {
+          map(() => {
             this.toastr.success('¡Heroe borrado con éxito!');
             return HeroesActions.deleteHeroSuccess({ id: action.id  })
           }),
@@ -97,5 +111,4 @@ export class HeroesEffects {
   );
 
 
-  constructor(private actions$: Actions, private heroesService: HeroesService) { }
 }

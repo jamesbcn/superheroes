@@ -28,6 +28,7 @@ export class HeroAddComponent {
 
   hidden = true;
   formFieldWidth = "1%";
+  submitButtonWidth = "1%"
   fontSize = "0rem";
 
   heroForm = this.fb.group({
@@ -49,8 +50,9 @@ export class HeroAddComponent {
                       takeUntil(this.destroy$) )
                         .subscribe(value =>{
                                               this.hidden = value;
-                                              this.formFieldWidth = this.hidden ? "1%" : "48%";
-                                              this.fontSize = this.hidden ? "0rem" : "1.5rem";
+                                              this.formFieldWidth = (this.hidden === true) ? "0%" : "48%";
+                                              this.fontSize = (this.hidden === true) ? "0rem" : "1.5rem";
+                                              this.submitButtonWidth = (this.hidden === true) ? "0%" : "100%";
                         })
 
    }
