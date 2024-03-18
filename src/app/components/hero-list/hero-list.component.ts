@@ -3,7 +3,6 @@ import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/mat
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatDialogModule, MatDialogConfig, MatDialog } from "@angular/material/dialog";
 import { Hero } from '../../interfaces/hero';
 import { MatIcon } from '@angular/material/icon';
@@ -21,7 +20,7 @@ import { HeroDeleteComponent } from '../hero-delete/hero-delete.component';
 @Component({
   selector: 'app-hero-list',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, MatSortModule, MatFormFieldModule, MatDialogModule,
+  imports: [MatPaginatorModule, MatTableModule, MatFormFieldModule, MatDialogModule,
     MatInputModule, MatIcon, TitleCasePipe],
   providers: [{ provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
   templateUrl: './hero-list.component.html',
@@ -33,7 +32,6 @@ export class HeroListComponent {
   dataSource = new MatTableDataSource<Hero>([]);
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  @ViewChild(MatSort) sort?: MatSort;
 
   constructor(private store: Store<AppStateInterface>, private dialog: MatDialog) { }
 
@@ -46,11 +44,12 @@ export class HeroListComponent {
       takeUntil(this.destroy$)
       ).subscribe(heroes => {
 
-      if (this.paginator && this.sort) {
+      if (this.paginator) {
 
-        this.dataSource = new MatTableDataSource<Hero>(heroes);
+        const sortedHeroes = [...heroes].sort((a, b) => a.name.localeCompare(b.name));
+
+        this.dataSource = new MatTableDataSource<Hero>(sortedHeroes);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
 
       }
 
